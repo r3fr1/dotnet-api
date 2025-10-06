@@ -1,0 +1,6 @@
+@PortfolioApi_HostAddress = http://localhost:5230
+
+GET {{PortfolioApi_HostAddress}}/
+Accept: application/json
+
+###
