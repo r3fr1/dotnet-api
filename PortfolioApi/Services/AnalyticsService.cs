@@ -66,7 +66,7 @@ namespace PortfolioApi.Services
             };
         }
 
-        public async Task<object> GetRiskAnalysisAsync(int portfolioId, decimal selicRate = 0.065m)
+        public async Task<object> GetRiskAnalysisAsync(int portfolioId, decimal selicRate = FinancialConstants.SelicValue)
         {
             var pf = await _ctx.Portfolios
                 .Include(p => p.Positions)

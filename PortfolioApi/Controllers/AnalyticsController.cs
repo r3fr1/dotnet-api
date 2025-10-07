@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using PortfolioApi.Services;
+using PortfolioApi.Constants;
 
 namespace PortfolioApi.Controllers
 {
@@ -18,7 +19,7 @@ namespace PortfolioApi.Controllers
         }
 
         [HttpGet("portfolios/{id:int}/risk-analysis")]
-        public async Task<IActionResult> RiskAnalysis(int id, [FromQuery] decimal selic = 0.065m)
+        public async Task<IActionResult> RiskAnalysis(int id, [FromQuery] decimal selic = FinancialConstants.SelicValue)
         {
             var res = await _svc.GetRiskAnalysisAsync(id, selic);
             return Ok(res);
