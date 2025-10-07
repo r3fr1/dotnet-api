@@ -35,7 +35,7 @@ namespace PortfolioApi.Services
         public async Task AddPositionAsync(int portfolioId, int assetId, decimal quantity, decimal averagePrice)
         {
             var pf = await _repo.GetByIdAsync(portfolioId);
-            if (pf == null) throw new Exception("Portfolio not found");
+            if (pf == null) throw new Exception(Messages.PortfolioNotFound);
             var pos = new Position { PortfolioId = portfolioId, AssetId = assetId, Quantity = quantity, AveragePrice = averagePrice };
             _ctx.Positions.Add(pos);
             await _ctx.SaveChangesAsync();

@@ -19,7 +19,7 @@ namespace PortfolioApi.Services
                     .ThenInclude(pos => pos.Asset)
                 .FirstOrDefaultAsync(p => p.Id == portfolioId);
 
-            if (pf == null) throw new Exception("Portfolio not found");
+            if (pf == null) throw new Exception(Messages.PortfolioNotFound);
 
             decimal currentValue = 0m;
             decimal invested = 0m;
@@ -74,11 +74,11 @@ namespace PortfolioApi.Services
                         .ThenInclude(a => a != null ? a.PriceHistory : null!)
                 .FirstOrDefaultAsync(p => p.Id == portfolioId);
 
-            if (pf == null) throw new Exception("Portfolio not found");
+            if (pf == null) throw new Exception(Messages.PortfolioNotFound);
 
             // portfolio current value
             decimal currentValue = pf.Positions.Sum(pos => pos.Quantity * (pos.Asset?.CurrentPrice ?? 0m));
-            if (currentValue <= 0) return new { message = "Empty portfolio" };
+            if (currentValue <= 0) return new { message = Messages.EmptyPortfolio };
 
             // compute per-asset daily returns standard deviation (simple)
             var volPerAsset = new Dictionary<int, double>();
@@ -142,10 +142,10 @@ namespace PortfolioApi.Services
                     .ThenInclude(pos => pos.Asset)
                 .FirstOrDefaultAsync(p => p.Id == portfolioId);
 
-            if (pf == null) throw new Exception("Portfolio not found");
+            if (pf == null) throw new Exception(Messages.PortfolioNotFound);
 
             decimal currentValue = pf.Positions.Sum(pos => pos.Quantity * (pos.Asset?.CurrentPrice ?? 0m));
-            if (currentValue <= 0) return new { message = "Empty portfolio" };
+            if (currentValue <= 0) return new { message = Messages.EmptyPortfolio };
 
             // build current weights by symbol
             var currentBySymbol = pf.Positions.ToDictionary(p => p.Asset!.Symbol, p => new { p, value = p.Quantity * p.Asset!.CurrentPrice });
