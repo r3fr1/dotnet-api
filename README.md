@@ -7,6 +7,11 @@ No terminal (na pasta PortfolioApi):
 dotnet run
 ```
 
+No terminal (na pasta PortfolioApi.Tests):
+```
+dotnet test
+```
+
 Acessar a URL exibida no console. Abra (http://localhost:5001)/swagger para testar visualmente os endpoints.
 
 Os endpoints esperados (conforme README) foram implementados:
